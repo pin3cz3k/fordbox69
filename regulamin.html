@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FordBox.pl</title>
+    <link rel="icon" href="obrazy/icon.png" type="icon">
+    <link rel="stylesheet" href="regulamin.css">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8-bom" />
+  </head>
+  <body>
+    <div class="online-text">Graczy online:</div><span class="online-counter" id="player-count">ERROR (sproboj F5)</span>
+    <div class="kropka">.</div>
+    <div class="button-title">Regulamin</div>
+    <a class="href-regulamin" href="regulamin.html">REGULAMIN</a>
+    <a class="href-index" href="index.html">STRONA GŁÓWNA</a>
+    <a class="href-sklep" href="sklep.html">SKLEP</a>
+
+    <div class="regulamin-text">
+1. Zakaz Nagminnego przeklinania na chacie serwerowym
+2. Zakaz wyzywania innych na chacie serwerowym
+3. Zakaz uzywania n-wordow
+4. Zakaz wykorzystywania bledow serwera - jezeli takie sa nalezy zglosic to do administracji
+5. Administrator sam moze wyznaczyc czas kary i kare w zaleznosci od stopnia zlamania regulaminu
+6. Administrator ma zawsze racje
+7. Zakaz uzywania jakichkolwiek wspomagaczy gry (makro, killaura, fly, huzuni)
+8. Zakaz jakiegokolwiek wysmienwania sie z serwera - jesli ci sie nie podoba, nie graj
+9. Dolaczajac na serwer discord oraz minecraft, akceptujesz regulamin
+10. Zakaz proszenia o faworke i rangi administracyjne
+    </div>
+
+<script>
+function initServerData(serverIp,serverPort){ 
+    console.log('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort);
+    fetch('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort)
+    .then(response => response.json())
+    .then(data => handleServerStatus(data));
+
+    function handleServerStatus(data){
+        if(data.status=='error'){
+            console.log(data.error);
+            return false;
+        }
+
+
+
+
+        const playerCounter = document.getElementById("player-count");
+        playerCounter.innerHTML = data.players.now;
+
+
+    } 
+}
+
+
+initServerData("54.37.223.50","25565");
+</script>
+  </body>
+</html>

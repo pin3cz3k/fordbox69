@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FordBox.pl</title>
+    <link rel="icon" href="obrazy/icon.png" type="icon">
+    <link rel="stylesheet" href="sklep.css">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8-bom" />
+  </head>
+  <body>
+    <div class="online-text">Graczy online:</div><span class="online-counter" id="player-count">ERROR (sproboj F5)</span>
+    <div class="kropka">.</div>
+    <a class="href-regulamin" href="regulamin.html">REGULAMIN</a>
+    <a class="href-index" href="index.html">STRONA GŁÓWNA</a>
+    <a class="href-sklep" href="sklep.html">SKLEP</a>
+    <div class="info1">Zakup odbywa się na serwerze discord.</div>
+    <a href="https://discord.gg/m2TQWCDbqz" class="discord">KLIKNIJ TUTAJ</a>
+
+<script>
+function initServerData(serverIp,serverPort){ 
+    console.log('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort);
+    fetch('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort)
+    .then(response => response.json())
+    .then(data => handleServerStatus(data));
+
+    function handleServerStatus(data){
+        if(data.status=='error'){
+            console.log(data.error);
+            return false;
+        }
+
+
+
+
+        const playerCounter = document.getElementById("player-count");
+        playerCounter.innerHTML = data.players.now;
+
+
+    } 
+}
+
+
+initServerData("54.37.223.50","25565");
+</script>
+  </body>
+</html>
